@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brittany's Gold (XAUUSD) FTMO Challenge Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0b0e1a;
+    --bg-1:#12172a;
+    --bg-2:#1a2138;
+    --line:#2a3352;
+    --bull:#00e5a0;
+    --bull-glow:#00e5a066;
+    --bear:#ff4d7e;
+    --bear-glow:#ff4d7e66;
+    --gold:#ffc94d;
+    --violet:#9b8bff;
+    --cyan:#4dd9ff;
+    --ink:#eef1ff;
+    --ink-dim:#9aa3c7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, #1c2650 0%, transparent 60%),
+      radial-gradient(ellipse 900px 600px at 100% 10%, #241a3f 0%, transparent 55%),
+      var(--bg-0);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 5vw;
+    background:rgba(11,14,26,0.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:700; font-size:1.05rem; letter-spacing:0.02em;}
+  .brand span{color:var(--gold);}
+  .tabs{display:flex; gap:8px;}
+  .tab-btn{
+    background:transparent; border:1px solid var(--line); color:var(--ink-dim);
+    padding:8px 18px; border-radius:999px; font-family:inherit; font-size:0.85rem;
+    cursor:pointer; transition:all .25s ease; letter-spacing:0.02em;
+  }
+  .tab-btn.active{
+    background:linear-gradient(135deg, var(--bull), var(--cyan));
+    color:#04140f; border-color:transparent; font-weight:600;
+  }
+  .tab-btn:hover:not(.active){ color:var(--ink); border-color:var(--violet); }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; padding:64px 5vw 40px; text-align:left;
+    overflow:hidden;
+  }
+  .hero h1{
+    font-size:clamp(2rem, 5vw, 3.4rem); margin:0 0 10px; line-height:1.05;
+    background:linear-gradient(120deg,#fff 30%, var(--gold) 70%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{ color:var(--ink-dim); max-width:640px; font-size:1.05rem; }
+  .chip-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  .chip{
+    font-size:0.78rem; padding:6px 12px; border-radius:999px; border:1px solid var(--line);
+    color:var(--ink-dim); font-family:'JetBrains Mono', monospace;
+  }
+  #tickerCanvas{ width:100%; height:220px; display:block; margin-top:32px; border-radius:14px;
+    border:1px solid var(--line); background:linear-gradient(180deg, var(--bg-1), var(--bg-0)); }
+
+  /* ===== PAGES ===== */
+  .page{ display:none; padding:10px 5vw 100px; max-width:1100px; margin:0 auto; }
+  .page.active{ display:block; animation:fadeIn .4s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ===== GUIDE STYLING ===== */
+  .section-card{
+    background:linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    border:1px solid var(--line); border-radius:16px;
+    padding:26px 28px; margin-bottom:22px;
+    position:relative; overflow:hidden;
+  }
+  .section-card::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:linear-gradient(180deg, var(--bull), var(--cyan));
+  }
+  .section-card.bear::before{ background:linear-gradient(180deg, var(--bear), var(--violet)); }
+  .section-card h2{
+    margin:0 0 14px; font-size:1.3rem; color:var(--gold);
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-card h2 .num{
+    font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--bg-0);
+    background:var(--gold); border-radius:6px; padding:2px 8px;
+  }
+  .section-card p, .section-card li{ color:var(--ink); line-height:1.7; }
+  .section-card ul{ margin:0; padding-left:20px; }
+  .section-card li{ margin-bottom:6px; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:700px){ .two-col{ grid-template-columns:1fr; } }
+  .pill-box{
+    background:var(--bg-0); border:1px dashed var(--line); border-radius:10px;
+    padding:14px 16px; font-family:'JetBrains Mono', monospace; font-size:0.85rem;
+    color:var(--cyan);
+  }
+  .motto{
+    text-align:center; font-size:1.4rem; font-weight:600; padding:36px 20px;
+    background:linear-gradient(120deg, #14203f, #241a3f);
+    border-radius:18px; border:1px solid var(--violet);
+    background-image:
+      linear-gradient(120deg, #14203f, #241a3f);
+    color:var(--gold);
+  }
+  .rules-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:14px; }
+  .rule-item{
+    background:var(--bg-0); border:1px solid var(--line); border-radius:12px; padding:14px 16px;
+    font-size:0.92rem; color:var(--ink-dim); display:flex; gap:10px; align-items:flex-start;
+  }
+  .rule-item .dot{ min-width:8px; height:8px; border-radius:50%; margin-top:6px;
+    background:var(--bull); box-shadow:0 0 8px var(--bull-glow); }
+
+  /* ===== PATTERNS PAGE ===== */
+  .patterns-intro{ text-align:center; margin:20px 0 34px; }
+  .patterns-intro h1{
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    background:linear-gradient(120deg, var(--cyan), var(--violet), var(--gold));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:8px;
+  }
+  .patterns-intro p{ color:var(--ink-dim); }
+  .pattern-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:20px;
+  }
+  .pattern-card{
+    background:var(--bg-1); border:1px solid var(--line); border-radius:18px;
+    padding:20px; text-align:center; cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position:relative;
+  }
+  .pattern-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    box-shadow:0 14px 30px -10px rgba(0,0,0,0.5);
+  }
+  .pattern-card svg{ width:100%; height:150px; }
+  .pattern-card h3{ margin:14px 0 6px; font-size:1.05rem; color:var(--ink); }
+  .pattern-tag{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:0.7rem;
+    padding:3px 10px; border-radius:999px; margin-bottom:10px;
+  }
+  .pattern-tag.bull{ background:var(--bull-glow); color:var(--bull); }
+  .pattern-tag.bear{ background:var(--bear-glow); color:var(--bear); }
+  .pattern-desc{
+    max-height:0; overflow:hidden; font-size:0.85rem; color:var(--ink-dim);
+    transition:max-height .35s ease, margin-top .35s ease; line-height:1.5;
+  }
+  .pattern-card.open .pattern-desc{ max-height:160px; margin-top:10px; }
+
+  footer{ text-align:center; padding:30px 5vw 50px; color:var(--ink-dim); font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">GOLD <span>FTMO</span> Playbook</div>
+  <div class="tabs">
+    <button class="tab-btn active" data-page="guide">Guide</button>
+    <button class="tab-btn" data-page="patterns">Candlestick Patterns</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Brittany's Gold FTMO $10K<br>2-Step Challenge Guide</h1>
+  <p class="sub">Protect capital first. Trade only high-quality setups. Zone first, rejection second, execute once. Supply and demand only.</p>
+  <div class="chip-row">
+    <span class="chip">FTMO 2-Step Challenge</span>
+    <span class="chip">$10,000 Account</span>
+    <span class="chip">Instrument: XAUUSD (Gold) only</span>
+    <span class="chip">New York Session</span>
+  </div>
+  <canvas id="tickerCanvas"></canvas>
+</div>
+
+<!-- ================= GUIDE PAGE ================= -->
+<div class="page active" id="page-guide">
+
+  <div class="section-card">
+    <h2><span class="num">01</span> Goal</h2>
+    <p>Pass the FTMO Challenge by protecting capital first and trading only high-quality setups.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">02</span> Account</h2>
+    <ul>
+      <li>FTMO 2-Step Challenge</li>
+      <li>$10,000 Account</li>
+      <li>Instrument: XAUUSD (Gold) only</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">03</span> Daily Routine — Before Trading</h2>
+    <ul>
+      <li>Wake up early.</li>
+      <li>Pray and clear your mind.</li>
+      <li>Check the FTMO economic calendar.</li>
+      <li>Skip trading if there is major high-impact news during your setup.</li>
+      <li>Never force a trade.</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">04</span> Trading Session</h2>
+    <ul>
+      <li>Trade only during the New York Session.</li>
+      <li>Preferred window: <span class="pill-box">9:00 AM – 11:00 AM CST</span></li>
+      <li>After that, stop looking for trades.</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">05</span> Top-Down Analysis — Step 1: 4-Hour Chart</h2>
+    <p>This chart controls everything. Look for:</p>
+    <ul>
+      <li>Overall trend</li>
+      <li>Supply zones</li>
+      <li>Demand zones</li>
+      <li>Fresh, untested zones</li>
+      <li>Zones price has already used up — skip those</li>
+    </ul>
+    <p>Ask yourself:</p>
+    <ul>
+      <li>Higher highs and higher lows = Buy only.</li>
+      <li>Lower highs and lower lows = Sell only.</li>
+      <li>Sideways = Wait.</li>
+    </ul>
+    <p><strong>Never fight the 4-hour trend.</strong></p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">06</span> Step 2: Draw Zones</h2>
+    <p>Mark:</p>
+    <ul>
+      <li>Supply zones above price</li>
+      <li>Demand zones below price</li>
+      <li>Only the strong, obvious zones</li>
+      <li>Fresh zones first — the first touch is the trade</li>
+    </ul>
+    <p>Zones only. No support and resistance lines, no trendlines.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">07</span> Step 3: Wait</h2>
+    <ul>
+      <li>Don't chase price.</li>
+      <li>Let price come to your area.</li>
+      <li>Patience is part of the strategy.</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">08</span> Entry Chart</h2>
+    <p>Use the 15-minute chart only after price reaches your planned zone on the 4-hour chart. Take the first rejection at the zone — that is the entry.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">09</span> Entry Checklist</h2>
+    <p>Enter only when several factors line up, such as:</p>
+    <ul>
+      <li>4-hour trend agrees.</li>
+      <li>Price reaches your supply or demand zone.</li>
+      <li>First touch of a fresh zone.</li>
+      <li>Strong 15-minute rejection at the zone.</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">10</span> Candlestick Setups</h2>
+    <p>Your confirmation is the rejection at the zone. Look for:</p>
+    <ul>
+      <li>Bullish Engulfing</li>
+      <li>Bearish Engulfing</li>
+      <li>Hammer</li>
+      <li>Shooting Star</li>
+      <li>Morning Star</li>
+      <li>Evening Star</li>
+      <li>Strong rejection wick</li>
+      <li>Break and retest</li>
+    </ul>
+    <p>Avoid weak, indecisive candles. See the <strong>Candlestick Patterns</strong> tab above for a visual reference.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">11</span> Market Structure</h2>
+    <div class="two-col">
+      <div class="pill-box">For buys:<br>Higher highs<br>Higher lows</div>
+      <div class="pill-box">For sells:<br>Lower highs<br>Lower lows</div>
+    </div>
+    <p style="margin-top:14px;">Market structure comes before candlesticks.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">12</span> Lot Size</h2>
+    <ul>
+      <li>Default: 3 lots</li>
+      <li>Exceptional A+ setup: 5 lots (only if it still fits your planned risk)</li>
+      <li>If the setup isn't clear: Don't trade.</li>
+    </ul>
+  </div>
+
+  <div class="section-card bear">
+    <h2><span class="num">13</span> Risk Management</h2>
+    <ul>
+      <li>One planned trade each day.</li>
+      <li>Maximum two trades if the second follows the same plan and you haven't started chasing losses.</li>
+      <li>No revenge trading.</li>
+      <li>No increasing lot size after a loss.</li>
+    </ul>
+    <p><strong>Capital protection comes first.</strong></p>
+  </div>
+
+  <div class="section-card bear">
+    <h2><span class="num">14</span> When NOT to Trade</h2>
+    <ul>
+      <li>During major news.</li>
+      <li>When you're emotional.</li>
+      <li>If you're tired.</li>
+      <li>If you missed the move.</li>
+      <li>During choppy sideways markets.</li>
+      <li>Out of boredom.</li>
+    </ul>
+    <p><strong>No setup = No trade.</strong></p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">15</span> Trading Mindset</h2>
+    <p>Think: <em>"I only need one good trade."</em></p>
+    <p>You don't need to catch every move.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">16</span> Weekly Review</h2>
+    <p>Every weekend ask:</p>
+    <ul>
+      <li>Did I follow the 4-hour trend?</li>
+      <li>Did I wait for price?</li>
+      <li>Did I enter too early?</li>
+      <li>Did I overtrade?</li>
+      <li>Did I follow my rules?</li>
+    </ul>
+    <p>Review both your winners and losers.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">17</span> Your Trading Rules</h2>
+    <div class="rules-grid">
+      <div class="rule-item"><span class="dot"></span> Trade gold (XAUUSD) only.</div>
+      <div class="rule-item"><span class="dot"></span> Trust the 4-hour trend.</div>
+      <div class="rule-item"><span class="dot"></span> Mark your supply and demand zones first.</div>
+      <div class="rule-item"><span class="dot"></span> Draw supply and demand zones.</div>
+      <div class="rule-item"><span class="dot"></span> First touch of a fresh zone is the trade.</div>
+      <div class="rule-item"><span class="dot"></span> Wait for confirmation.</div>
+      <div class="rule-item"><span class="dot"></span> Use 3 lots by default.</div>
+      <div class="rule-item"><span class="dot"></span> Use up to 5 lots only on your highest-quality setups if your planned risk still stays within your limits.</div>
+      <div class="rule-item"><span class="dot"></span> Trade during the New York session.</div>
+      <div class="rule-item"><span class="dot"></span> Stay patient.</div>
+      <div class="rule-item"><span class="dot"></span> One good trade is enough.</div>
+      <div class="rule-item"><span class="dot"></span> Protect your account first.</div>
+    </div>
+  </div>
+
+  <div class="motto">
+    "Zone first. Rejection second. Execute once. Protect capital. Repeat."
+  </div>
+
+</div>
+
+<!-- ================= PATTERNS PAGE ================= -->
+<div class="page" id="page-patterns">
+  <div class="patterns-intro">
+    <h1>Candlestick Pattern Gallery</h1>
+    <p>Tap a card to reveal the setup notes. These are rejection confirmations at a zone, not trades by themselves. Green = bullish confirmation, pink = bearish confirmation.</p>
+  </div>
+
+  <div class="pattern-grid" id="patternGrid"></div>
+</div>
+
+<footer>Brittany's Gold FTMO Playbook — zone first, rejection second, execute once.</footer>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const pages = document.querySelectorAll('.page');
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      pages.forEach(p=>p.classList.remove('active'));
+      document.getElementById('page-'+btn.dataset.page).classList.add('active');
+    });
+  });
+
+  // ---------- HERO LIVE CANDLESTICK TICKER ----------
+  const canvas = document.getElementById('tickerCanvas');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas(){
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let candles = [];
+  let price = 100;
+  function seedCandles(n){
+    candles = [];
+    for(let i=0;i<n;i++){
+      const open = price;
+      const change = (Math.random()-0.48) * 6;
+      const close = open + change;
+      const high = Math.max(open,close) + Math.random()*3;
+      const low = Math.min(open,close) - Math.random()*3;
+      candles.push({open, close, high, low});
+      price = close;
+    }
+  }
+  seedCandles(60);
+
+  function pushCandle(){
+    const open = price;
+    const change = (Math.random()-0.48) * 6;
+    const close = open + change;
+    const high = Math.max(open,close) + Math.random()*3;
+    const low = Math.min(open,close) - Math.random()*3;
+    candles.push({open, close, high, low});
+    price = close;
+    if(candles.length > 60) candles.shift();
+  }
+
+  function drawTicker(){
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    const allVals = candles.flatMap(c=>[c.high,c.low]);
+    const max = Math.max(...allVals);
+    const min = Math.min(...allVals);
+    const range = (max-min) || 1;
+    const pad = h*0.1;
+
+    const cw = w/candles.length;
+    candles.forEach((c,i)=>{
+      const x = i*cw + cw*0.2;
+      const bw = cw*0.6;
+      const yFor = v => h - pad - ((v-min)/range)*(h-2*pad);
+      const bullish = c.close >= c.open;
+      const color = bullish ? '#00e5a0' : '#ff4d7e';
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 6;
+      ctx.lineWidth = 1.5;
+
+      // wick
+      ctx.beginPath();
+      ctx.moveTo(x+bw/2, yFor(c.high));
+      ctx.lineTo(x+bw/2, yFor(c.low));
+      ctx.stroke();
+
+      // body
+      const yOpen = yFor(c.open);
+      const yClose = yFor(c.close);
+      const bodyTop = Math.min(yOpen,yClose);
+      const bodyH = Math.max(Math.abs(yOpen-yClose), 2);
+      ctx.fillRect(x, bodyTop, bw, bodyH);
+    });
+    ctx.shadowBlur = 0;
+  }
+
+  drawTicker();
+  setInterval(()=>{ pushCandle(); drawTicker(); }, 900);
+
+  // ---------- CANDLESTICK PATTERN SVG DEFINITIONS ----------
+  // Each pattern defined as an array of candles: {o,c,h,l} on a 0-100 relative scale, drawn left to right.
+  const patterns = [
+    {
+      name:"Bullish Engulfing",
+      type:"bull",
+      desc:"A small bearish candle is fully engulfed by a larger bullish candle. Signals buyers overwhelming sellers at a demand zone.",
+      candles:[
+        {o:55,c:45,h:58,l:42},
+        {o:40,c:62,h:65,l:37}
+      ]
+    },
+    {
+      name:"Bearish Engulfing",
+      type:"bear",
+      desc:"A small bullish candle is fully engulfed by a larger bearish candle. Signals sellers overwhelming buyers at a supply zone.",
+      candles:[
+        {o:45,c:55,h:58,l:42},
+        {o:62,c:40,h:65,l:37}
+      ]
+    },
+    {
+      name:"Hammer",
+      type:"bull",
+      desc:"Small body near the top, long lower wick. Shows rejection of lower prices — a reversal signal at support or demand.",
+      candles:[
+        {o:52,c:58,h:60,l:20}
+      ]
+    },
+    {
+      name:"Shooting Star",
+      type:"bear",
+      desc:"Small body near the bottom, long upper wick. Shows rejection of higher prices — a reversal signal at resistance or supply.",
+      candles:[
+        {o:48,c:42,h:80,l:40}
+      ]
+    },
+    {
+      name:"Morning Star",
+      type:"bull",
+      desc:"Three-candle reversal: a long bearish candle, a small indecisive candle, then a strong bullish candle closing into the first body.",
+      candles:[
+        {o:65,c:40,h:67,l:38},
+        {o:36,c:33,h:39,l:30},
+        {o:36,c:60,h:63,l:34}
+      ]
+    },
+    {
+      name:"Evening Star",
+      type:"bear",
+      desc:"Three-candle reversal: a long bullish candle, a small indecisive candle, then a strong bearish candle closing into the first body.",
+      candles:[
+        {o:35,c:60,h:63,l:33},
+        {o:64,c:67,h:69,l:61},
+        {o:64,c:40,h:66,l:37}
+      ]
+    },
+    {
+      name:"Strong Rejection Wick",
+      type:"bull",
+      desc:"A long wick with a small body shows price was pushed hard in one direction then rejected — a sign of hidden buying or selling pressure.",
+      candles:[
+        {o:50,c:56,h:58,l:15}
+      ]
+    },
+    {
+      name:"Break and Retest",
+      type:"bull",
+      desc:"Price breaks a key level, pulls back to retest it as new support, then continues — confirming the level has flipped.",
+      candles:[
+        {o:30,c:45,h:47,l:28},
+        {o:45,c:62,h:64,l:44},
+        {o:55,c:50,h:57,l:47},
+        {o:50,c:66,h:68,l:48}
+      ]
+    }
+  ];
+
+  const bullColor = "#00e5a0";
+  const bearColor = "#ff4d7e";
+  const gridColors = ["#4dd9ff22","#9b8bff22","#ffc94d22"];
+
+  function buildCandleSVG(pattern){
+    const w = 220, h = 150;
+    const n = pattern.candles.length;
+    const slot = w / n;
+    const bodyWidth = Math.min(slot*0.45, 34);
+
+    const vals = pattern.candles.flatMap(c=>[c.h,c.l]);
+    const max = Math.max(...vals);
+    const min = Math.min(...vals);
+    const range = (max-min) || 1;
+    const topPad = 14, botPad = 14;
+    const yFor = v => h - botPad - ((v-min)/range)*(h-topPad-botPad);
+
+    let svg = `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">`;
+    // decorative background grid lines
+    for(let i=1;i<4;i++){
+      svg += `<line x1="0" y1="${(h/4)*i}" x2="${w}" y2="${(h/4)*i}" stroke="${gridColors[i%3]}" stroke-width="1"/>`;
+    }
+
+    pattern.candles.forEach((c,i)=>{
+      const cx = slot*i + slot/2;
+      const bullish = c.c >= c.o;
+      const color = bullish ? bullColor : bearColor;
+      const yHigh = yFor(c.h), yLow = yFor(c.l);
+      const yOpen = yFor(c.o), yClose = yFor(c.c);
+      const bodyTop = Math.min(yOpen,yClose);
+      const bodyH = Math.max(Math.abs(yOpen-yClose), 3);
+
+      svg += `<line x1="${cx}" y1="${yHigh}" x2="${cx}" y2="${yLow}" stroke="${color}" stroke-width="2"/>`;
+      svg += `<rect x="${cx-bodyWidth/2}" y="${bodyTop}" width="${bodyWidth}" height="${bodyH}" rx="2" fill="${color}" opacity="0.95">`;
+      svg += `<animate attributeName="opacity" values="0.6;1;0.6" dur="${2+i*0.3}s" repeatCount="indefinite"/>`;
+      svg += `</rect>`;
+    });
+
+    svg += `</svg>`;
+    return svg;
+  }
+
+  const grid = document.getElementById('patternGrid');
+  patterns.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'pattern-card';
+    card.innerHTML = `
+      <span class="pattern-tag ${p.type}">${p.type === 'bull' ? 'BULLISH' : 'BEARISH'}</span>
+      ${buildCandleSVG(p)}
+      <h3>${p.name}</h3>
+      <div class="pattern-desc">${p.desc}</div>
+    `;
+    card.addEventListener('click', ()=> card.classList.toggle('open'));
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
