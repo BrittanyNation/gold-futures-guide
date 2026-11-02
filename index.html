@@ -169,6 +169,36 @@
   .pattern-card.open .pattern-desc{ max-height:160px; margin-top:10px; }
 
   footer{ text-align:center; padding:30px 5vw 50px; color:var(--ink-dim); font-size:0.8rem; }
+  /* ============ ANIMATED EXAMPLES ============ */
+  .anim-wrap{ margin-top:20px; border:1px solid var(--line); border-radius:14px; padding:18px; background:linear-gradient(180deg, var(--bg-1), var(--bg-0)); }
+  .anim-wrap h3{ font-family:'Space Grotesk', sans-serif; font-size:1.05rem; margin-bottom:4px; }
+  .anim-wrap .sub{ color:var(--ink-dim); font-size:0.86rem; margin-bottom:10px; }
+  .anim-wrap svg{ width:100%; height:auto; display:block; }
+  .anim-steps{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .anim-steps span{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--ink-dim);
+    border:1px solid var(--line); border-radius:99px; padding:5px 11px; }
+  .anim-steps span b{ color:var(--gold); font-weight:600; }
+  .zone-label{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.14em; }
+  .mk-label{ font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; }
+  .price-path{ fill:none; stroke:var(--gold); stroke-width:2.6; stroke-linejoin:round; stroke-linecap:round;
+    stroke-dasharray:100; stroke-dashoffset:100; }
+  .sd-anim .price-path{ animation: drawPath 9s linear infinite; }
+  .bo-anim .price-path{ animation: drawPath 10s linear infinite; }
+  @keyframes drawPath{ 0%{ stroke-dashoffset:100; opacity:1; } 60%{ stroke-dashoffset:0; opacity:1; }
+    88%{ stroke-dashoffset:0; opacity:1; } 95%{ stroke-dashoffset:0; opacity:0; } 100%{ stroke-dashoffset:100; opacity:0; } }
+  .zone-pulse{ animation: zonePulse 3s ease-in-out infinite; }
+  @keyframes zonePulse{ 0%,100%{ opacity:0.55; } 50%{ opacity:1; } }
+  .mk{ opacity:0; }
+  .sd-anim .mk-sell{ animation: mkSell 9s linear infinite; }
+  .sd-anim .mk-buy{ animation: mkBuy 9s linear infinite; }
+  @keyframes mkSell{ 0%,30%{ opacity:0; } 36%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+  @keyframes mkBuy{ 0%,56%{ opacity:0; } 62%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+  .bo-anim .mk-break{ animation: mkBreak 10s linear infinite; }
+  .bo-anim .mk-retest{ animation: mkRetest 10s linear infinite; }
+  .bo-anim .flip-support{ animation: flipSup 10s linear infinite; opacity:0; }
+  @keyframes mkBreak{ 0%,52%{ opacity:0; } 58%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+  @keyframes mkRetest{ 0%,64%{ opacity:0; } 70%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+  @keyframes flipSup{ 0%,64%{ opacity:0; } 72%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
 </style>
 </head>
 <body>
@@ -307,6 +337,59 @@
   <div class="section-card">
     <h2><span class="num">08</span> Entry Chart</h2>
     <p>Execution is on the 5-minute chart. When price reaches your 15-minute zone, drop to the 5-minute chart and take the first rejection at the zone — that is the entry.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="num">🎬</span> Animated Examples</h2>
+    <p>Watch the two plays run. Both loop.</p>
+
+    <div class="anim-wrap sd-anim">
+      <h3>Supply and Demand — The Bounce</h3>
+      <p class="sub">Price rallies into supply and gets rejected: sell. Price falls into demand and gets rejected: buy. The entry is the first rejection at the zone, on the 5-minute.</p>
+      <svg viewBox="0 0 560 320" role="img" aria-label="Animated supply and demand setup">
+        <line x1="40" y1="110" x2="520" y2="110" stroke="#2c2318" stroke-width="1"/>
+        <line x1="40" y1="180" x2="520" y2="180" stroke="#2c2318" stroke-width="1"/>
+        <rect class="zone-pulse" x="40" y="28" width="480" height="32" fill="rgba(248,81,73,0.13)" stroke="#f85149" stroke-width="1" stroke-dasharray="5 4"/>
+        <text class="zone-label" x="48" y="48" fill="#f85149">SUPPLY ZONE</text>
+        <rect class="zone-pulse" x="40" y="258" width="480" height="32" fill="rgba(63,185,80,0.13)" stroke="#3fb950" stroke-width="1" stroke-dasharray="5 4"/>
+        <text class="zone-label" x="48" y="278" fill="#3fb950">DEMAND ZONE</text>
+        <path class="price-path" pathLength="100" d="M40,185 L115,125 L155,142 L215,82 L272,44 L292,74 L355,150 L398,138 L448,205 L488,262 L503,238 L520,185"/>
+        <g class="mk mk-sell">
+          <circle cx="272" cy="44" r="6" fill="none" stroke="#f85149" stroke-width="2"/>
+          <text class="mk-label" x="286" y="40" fill="#f85149">SELL — first rejection</text>
+        </g>
+        <g class="mk mk-buy">
+          <circle cx="488" cy="262" r="6" fill="none" stroke="#3fb950" stroke-width="2"/>
+          <text class="mk-label" x="330" y="252" fill="#3fb950">BUY — first rejection</text>
+        </g>
+      </svg>
+      <div class="anim-steps"><span><b>1</b> Mark zones on the 15-minute</span><span><b>2</b> Price reaches the zone</span><span><b>3</b> First rejection on the 5-minute</span><span><b>4</b> Enter at the rejection</span></div>
+    </div>
+
+    <div class="anim-wrap bo-anim">
+      <h3>Support and Resistance — The Breakout</h3>
+      <p class="sub">Resistance holds twice. The third push breaks through, price comes back to retest the same line — now support — and that retest is the entry.</p>
+      <svg viewBox="0 0 560 320" role="img" aria-label="Animated support and resistance breakout">
+        <line x1="40" y1="180" x2="520" y2="180" stroke="#2c2318" stroke-width="1"/>
+        <line x1="40" y1="250" x2="520" y2="250" stroke="#2c2318" stroke-width="1"/>
+        <line x1="40" y1="92" x2="520" y2="92" stroke="#f85149" stroke-width="1.6" stroke-dasharray="7 5"/>
+        <text class="zone-label" x="44" y="82" fill="#f85149">RESISTANCE</text>
+        <g class="flip-support">
+          <line x1="420" y1="92" x2="520" y2="92" stroke="#3fb950" stroke-width="2.4"/>
+          <text class="zone-label" x="424" y="82" fill="#3fb950">NOW SUPPORT</text>
+        </g>
+        <path class="price-path" pathLength="100" d="M40,205 L100,152 L138,96 L178,162 L228,142 L278,96 L318,152 L368,122 L418,72 L452,90 L520,36"/>
+        <g class="mk mk-break">
+          <circle cx="418" cy="72" r="6" fill="none" stroke="#e8c476" stroke-width="2"/>
+          <text class="mk-label" x="352" y="58" fill="#e8c476">BREAKOUT</text>
+        </g>
+        <g class="mk mk-retest">
+          <circle cx="452" cy="90" r="6" fill="none" stroke="#3fb950" stroke-width="2"/>
+          <text class="mk-label" x="440" y="122" fill="#3fb950">RETEST = ENTRY</text>
+        </g>
+      </svg>
+      <div class="anim-steps"><span><b>1</b> Resistance holds — no chase</span><span><b>2</b> Breakout through the line</span><span><b>3</b> Retest: old resistance acts as support</span><span><b>4</b> Enter on the retest bounce</span></div>
+    </div>
   </div>
 
   <div class="section-card">
