@@ -76,8 +76,9 @@
     font-size:0.78rem; padding:6px 12px; border-radius:999px; border:1px solid var(--line);
     color:var(--ink-dim); font-family:'JetBrains Mono', monospace;
   }
-  #tickerCanvas{ width:100%; height:220px; display:block; margin-top:32px; border-radius:14px;
+  .tv-chart{ width:100%; height:440px; margin-top:32px; border-radius:14px; overflow:hidden;
     border:1px solid var(--line); background:linear-gradient(180deg, var(--bg-1), var(--bg-0)); }
+  .chart-note{ color:var(--ink-dim); font-size:0.8rem; margin-top:10px; font-family:'JetBrains Mono', monospace; }
 
   /* ===== PAGES ===== */
   .page{ display:none; padding:10px 5vw 100px; max-width:1100px; margin:0 auto; }
@@ -189,7 +190,25 @@
     <span class="chip">Instrument: MGC (Micro Gold) only</span>
     <span class="chip">New York Session</span>
   </div>
-  <canvas id="tickerCanvas"></canvas>
+  <div class="tv-chart">
+    <div class="tradingview-widget-container" style="height:100%;width:100%">
+      <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+      {
+        "symbol": "OANDA:XAUUSD",
+        "interval": "15",
+        "timezone": "America/New_York",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "allow_symbol_change": false,
+        "hide_side_toolbar": true,
+        "support_host": "https://www.tradingview.com"
+      }
+      </script>
+    </div>
+  </div>
+  <p class="chart-note">Live chart: Gold (XAU/USD), 15-minute candles, New York time. The price in the chart header is the live gold price.</p>
 </div>
 
 <!-- ================= GUIDE PAGE ================= -->
@@ -442,84 +461,7 @@
     });
   });
 
-  // ---------- HERO LIVE CANDLESTICK TICKER ----------
-  const canvas = document.getElementById('tickerCanvas');
-  const ctx = canvas.getContext('2d');
-  function resizeCanvas(){
-    canvas.width = canvas.clientWidth * devicePixelRatio;
-    canvas.height = canvas.clientHeight * devicePixelRatio;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  let candles = [];
-  let price = 100;
-  function seedCandles(n){
-    candles = [];
-    for(let i=0;i<n;i++){
-      const open = price;
-      const change = (Math.random()-0.48) * 6;
-      const close = open + change;
-      const high = Math.max(open,close) + Math.random()*3;
-      const low = Math.min(open,close) - Math.random()*3;
-      candles.push({open, close, high, low});
-      price = close;
-    }
-  }
-  seedCandles(60);
-
-  function pushCandle(){
-    const open = price;
-    const change = (Math.random()-0.48) * 6;
-    const close = open + change;
-    const high = Math.max(open,close) + Math.random()*3;
-    const low = Math.min(open,close) - Math.random()*3;
-    candles.push({open, close, high, low});
-    price = close;
-    if(candles.length > 60) candles.shift();
-  }
-
-  function drawTicker(){
-    const w = canvas.width, h = canvas.height;
-    ctx.clearRect(0,0,w,h);
-
-    const allVals = candles.flatMap(c=>[c.high,c.low]);
-    const max = Math.max(...allVals);
-    const min = Math.min(...allVals);
-    const range = (max-min) || 1;
-    const pad = h*0.1;
-
-    const cw = w/candles.length;
-    candles.forEach((c,i)=>{
-      const x = i*cw + cw*0.2;
-      const bw = cw*0.6;
-      const yFor = v => h - pad - ((v-min)/range)*(h-2*pad);
-      const bullish = c.close >= c.open;
-      const color = bullish ? '#00e5a0' : '#ff4d7e';
-      ctx.strokeStyle = color;
-      ctx.fillStyle = color;
-      ctx.shadowColor = color;
-      ctx.shadowBlur = 6;
-      ctx.lineWidth = 1.5;
-
-      // wick
-      ctx.beginPath();
-      ctx.moveTo(x+bw/2, yFor(c.high));
-      ctx.lineTo(x+bw/2, yFor(c.low));
-      ctx.stroke();
-
-      // body
-      const yOpen = yFor(c.open);
-      const yClose = yFor(c.close);
-      const bodyTop = Math.min(yOpen,yClose);
-      const bodyH = Math.max(Math.abs(yOpen-yClose), 2);
-      ctx.fillRect(x, bodyTop, bw, bodyH);
-    });
-    ctx.shadowBlur = 0;
-  }
-
-  drawTicker();
-  setInterval(()=>{ pushCandle(); drawTicker(); }, 900);
+  // Live gold chart is the TradingView widget in the hero above.
 
   // ---------- CANDLESTICK PATTERN SVG DEFINITIONS ----------
   // Each pattern defined as an array of candles: {o,c,h,l} on a 0-100 relative scale, drawn left to right.
