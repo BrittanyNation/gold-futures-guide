@@ -199,6 +199,18 @@
   @keyframes mkBreak{ 0%,52%{ opacity:0; } 58%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
   @keyframes mkRetest{ 0%,64%{ opacity:0; } 70%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
   @keyframes flipSup{ 0%,64%{ opacity:0; } 72%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+  /* ============ NEWS FOLDERS ============ */
+  .news-folders{ display:grid; gap:12px; margin-top:8px; }
+  .nf{ border:1px solid var(--line); border-left-width:5px; border-radius:12px; padding:12px 14px 13px; }
+  .nf p{ margin:0; line-height:1.65; }
+  .nf-tab{ display:inline-block; font-family:'JetBrains Mono', monospace; font-size:0.72rem; font-weight:700;
+    letter-spacing:0.1em; padding:4px 11px; border-radius:8px; margin-bottom:8px; color:#0d0a06; }
+  .nf-gold{ border-left-color:#e8c476; background:rgba(232,196,118,0.06); } .nf-gold .nf-tab{ background:#e8c476; }
+  .nf-violet{ border-left-color:#a371f7; background:rgba(163,113,247,0.07); } .nf-violet .nf-tab{ background:#a371f7; }
+  .nf-green{ border-left-color:#3fb950; background:rgba(63,185,80,0.06); } .nf-green .nf-tab{ background:#3fb950; }
+  .nf-blue{ border-left-color:#58a6ff; background:rgba(88,166,255,0.06); } .nf-blue .nf-tab{ background:#58a6ff; }
+  .nf-pink{ border-left-color:#f778ba; background:rgba(247,120,186,0.06); } .nf-pink .nf-tab{ background:#f778ba; }
+  .nf-red{ border-left-color:#f85149; background:rgba(248,81,73,0.07); } .nf-red .nf-tab{ background:#f85149; }
 </style>
 </head>
 <body>
@@ -247,14 +259,14 @@
   <!-- GOLD NEWS START -->
   <div class="section-card bear">
     <h2><span class="num">📰</span> Gold News — Monday, November 2, 2026</h2>
-    <ul>
-      <li><strong>Price:</strong> Spot gold (XAU/USD) is rebounding more than 1% today, around $3,940 to $3,950 an ounce in intraday reports. Reuters via Kitco put spot up 1.74% at $3,942.57 at 9:11 AM ET, with December futures at $3,952.80, after Friday's 3.6% fall to a one-year low and a $3,875.65 close.</li>
-      <li><strong>Why:</strong> Softer oil prices on US and Iran talks tempered inflation worries, bargain hunters returned after Friday's plunge, and a softer dollar helped. The cap on the bounce: the Fed held rates at 3.75% to 4.00% on October 28, and traders still see about a 76% chance of a December hike on CME FedWatch, which keeps pressure on a non-yielding asset.</li>
-      <li><strong>Levels for the 15-minute markup:</strong> Resistance at $3,965, then the $4,000 to $4,020 zone, then $4,037. Support at $3,891 to $3,895, then Friday's zone at $3,870 to $3,875, then $3,800.</li>
-      <li><strong>Today on the calendar:</strong> Final S&amp;P Global Manufacturing PMI at 9:45 AM ET; ISM Manufacturing PMI at 10:00 AM ET (forecast 54.7, prior 54.5) and Construction Spending at 10:00 AM ET; Chicago Fed President Goolsbee moderates a discussion at 11:15 AM ET; Fed Senior Loan Officer Survey at 2:00 PM ET. All times ET.</li>
-      <li><strong>This week:</strong> Tuesday, November 3: US midterm elections and JOLTS job openings at 10:00 AM ET. Wednesday, November 4: ADP employment at 8:15 AM ET, Treasury refunding at 8:30 AM ET, ISM Services at 10:00 AM ET. Thursday, November 5: jobless claims at 8:30 AM ET, Bank of England decision at 7:00 AM ET, and Fed speakers Hammack, Barkin and Logan. Friday, November 6: October jobs report at 8:30 AM ET (consensus roughly 55,000 to 65,000 after 29,000 in September, unemployment expected at 4.2%) and Michigan sentiment at 10:00 AM ET. Next FOMC decision is December 9.</li>
-      <li><strong>Your rule applies:</strong> Major news inside your 8:30 to 10:00 AM ET window means skip. Today the ISM print lands at 10:00 AM ET, right at the end of your window, so be flat or done before it. Friday's jobs report lands at 8:30 AM ET, right at your window open, so that open is a skip under your rule.</li>
-    </ul>
+    <div class="news-folders">
+      <div class="nf nf-gold"><span class="nf-tab">📂 PRICE</span><p>Spot gold (XAU/USD) is rebounding more than 1% today, around $3,940 to $3,950 an ounce in intraday reports. Reuters via Kitco put spot up 1.74% at $3,942.57 at 9:11 AM ET, with December futures at $3,952.80, after Friday's 3.6% fall to a one-year low and a $3,875.65 close.</p></div>
+      <div class="nf nf-violet"><span class="nf-tab">📂 WHY</span><p>Softer oil prices on US and Iran talks tempered inflation worries, bargain hunters returned after Friday's plunge, and a softer dollar helped. The cap on the bounce: the Fed held rates at 3.75% to 4.00% on October 28, and traders still see about a 76% chance of a December hike on CME FedWatch, which keeps pressure on a non-yielding asset.</p></div>
+      <div class="nf nf-green"><span class="nf-tab">📂 LEVELS — 15-MINUTE MARKUP</span><p>Resistance at $3,965, then the $4,000 to $4,020 zone, then $4,037. Support at $3,891 to $3,895, then Friday's zone at $3,870 to $3,875, then $3,800.</p></div>
+      <div class="nf nf-blue"><span class="nf-tab">📂 TODAY ON THE CALENDAR</span><p>Final S&amp;P Global Manufacturing PMI at 9:45 AM ET; ISM Manufacturing PMI at 10:00 AM ET (forecast 54.7, prior 54.5) and Construction Spending at 10:00 AM ET; Chicago Fed President Goolsbee moderates a discussion at 11:15 AM ET; Fed Senior Loan Officer Survey at 2:00 PM ET. All times ET.</p></div>
+      <div class="nf nf-pink"><span class="nf-tab">📂 THIS WEEK</span><p>Tuesday, November 3: US midterm elections and JOLTS job openings at 10:00 AM ET. Wednesday, November 4: ADP employment at 8:15 AM ET, Treasury refunding at 8:30 AM ET, ISM Services at 10:00 AM ET. Thursday, November 5: jobless claims at 8:30 AM ET, Bank of England decision at 7:00 AM ET, and Fed speakers Hammack, Barkin and Logan. Friday, November 6: October jobs report at 8:30 AM ET (consensus roughly 55,000 to 65,000 after 29,000 in September, unemployment expected at 4.2%) and Michigan sentiment at 10:00 AM ET. Next FOMC decision is December 9.</p></div>
+      <div class="nf nf-red"><span class="nf-tab">📂 YOUR RULE APPLIES</span><p>Major news inside your 8:30 to 10:00 AM ET window means skip. Today the ISM print lands at 10:00 AM ET, right at the end of your window, so be flat or done before it. Friday's jobs report lands at 8:30 AM ET, right at your window open, so that open is a skip under your rule.</p></div>
+    </div>
     <p style="color:var(--ink-dim); font-size:0.8rem;">Dated snapshot for Monday, November 2, 2026. Prices are intraday reports, not live quotes.</p>
   </div>
   <!-- GOLD NEWS END -->
