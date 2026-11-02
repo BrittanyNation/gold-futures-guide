@@ -211,6 +211,14 @@
   .nf-blue{ border-left-color:#58a6ff; background:rgba(88,166,255,0.06); } .nf-blue .nf-tab{ background:#58a6ff; }
   .nf-pink{ border-left-color:#f778ba; background:rgba(247,120,186,0.06); } .nf-pink .nf-tab{ background:#f778ba; }
   .nf-red{ border-left-color:#f85149; background:rgba(248,81,73,0.07); } .nf-red .nf-tab{ background:#f85149; }
+  /* ============ RED FOLDERS ============ */
+  .rf-list{ display:grid; gap:8px; margin-top:8px; }
+  .rf-row{ display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline; border:1px solid rgba(248,81,73,0.35);
+    background:rgba(248,81,73,0.06); border-radius:10px; padding:9px 13px; }
+  .rf-day{ font-family:'JetBrains Mono', monospace; font-size:0.74rem; font-weight:700; color:#f85149; letter-spacing:0.08em; min-width:118px; }
+  .rf-ev{ flex:1; min-width:220px; line-height:1.55; }
+  .rf-cur{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; border:1px solid rgba(248,81,73,0.5); color:#f85149;
+    border-radius:6px; padding:1px 7px; }
 </style>
 </head>
 <body>
@@ -271,6 +279,26 @@
   </div>
   <!-- GOLD NEWS END -->
   <p style="color:var(--ink-dim); font-size:0.82rem; margin:10px 2px 0;">Full calendar: <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener" style="color:var(--gold);">Forex Factory Calendar</a></p>
+
+  <!-- RED FOLDERS START -->
+  <div class="section-card bear">
+    <h2><span class="num">🔴</span> Red Folders This Week — Nov 2 to 6, 2026</h2>
+    <p>High impact events only, straight from Forex Factory. All times ET.</p>
+    <div class="rf-list">
+      <div class="rf-row"><span class="rf-day">MON NOV 2</span><span class="rf-ev">RBA Cash Rate, Rate Statement and Press Conference — 10:30 PM</span><span class="rf-cur">AUD</span></div>
+      <div class="rf-row"><span class="rf-day">TUE NOV 3</span><span class="rf-ev">Congressional Elections — All Day</span><span class="rf-cur">USD</span></div>
+      <div class="rf-row"><span class="rf-day">TUE NOV 3</span><span class="rf-ev">Employment Change and Unemployment Rate — 4:45 PM</span><span class="rf-cur">NZD</span></div>
+      <div class="rf-row"><span class="rf-day">WED NOV 4</span><span class="rf-ev">No red folders</span><span class="rf-cur">—</span></div>
+      <div class="rf-row"><span class="rf-day">THU NOV 5</span><span class="rf-ev">Bank of England rate decision, Monetary Policy Report and Summary — 7:00 AM · Gov Bailey speaks 7:30 AM</span><span class="rf-cur">GBP</span></div>
+      <div class="rf-row"><span class="rf-day">FRI NOV 6</span><span class="rf-ev">Jobs report: Non-Farm Employment Change, Unemployment Rate, Average Hourly Earnings — 8:30 AM</span><span class="rf-cur">USD</span></div>
+      <div class="rf-row"><span class="rf-day">FRI NOV 6</span><span class="rf-ev">Employment Change and Unemployment Rate — 8:30 AM</span><span class="rf-cur">CAD</span></div>
+      <div class="rf-row"><span class="rf-day">FRI NOV 6</span><span class="rf-ev">BOJ Gov Ueda speaks — 11:00 AM</span><span class="rf-cur">JPY</span></div>
+    </div>
+    <p style="margin-top:12px;"><strong>Friday 8:30 AM ET is your window open — the jobs report makes Friday a skip day under your rule.</strong></p>
+    <p style="color:var(--ink-dim); font-size:0.8rem;">For reference, Forex Factory rates this week's ISM Manufacturing, JOLTS and ISM Services as orange (medium), and ADP as yellow (low) — not red. Updated every Sunday.</p>
+  </div>
+  <!-- RED FOLDERS END -->
+
 
   <div class="section-card">
     <h2><span class="num">01</span> Goal</h2>
