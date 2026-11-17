@@ -199,6 +199,31 @@
   @keyframes mkBreak{ 0%,52%{ opacity:0; } 58%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
   @keyframes mkRetest{ 0%,64%{ opacity:0; } 70%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
   @keyframes flipSup{ 0%,64%{ opacity:0; } 72%,88%{ opacity:1; } 95%,100%{ opacity:0; } }
+
+  .fs-anim .price-path{ animation: drawPathFs 14s linear infinite; }
+  @keyframes drawPathFs{ 0%{ stroke-dashoffset:100; opacity:1; } 62%{ stroke-dashoffset:0; opacity:1; }
+    92%{ stroke-dashoffset:0; opacity:1; } 97%{ stroke-dashoffset:0; opacity:0; } 100%{ stroke-dashoffset:100; opacity:0; } }
+  .fs-anim .mk-bounce{ animation: mkFsBounce 14s linear infinite; }
+  .fs-anim .mk-short{ animation: mkFsShort 14s linear infinite; }
+  .fs-anim .mk-t1{ animation: mkFsT1 14s linear infinite; }
+  .fs-anim .mk-t2{ animation: mkFsT2 14s linear infinite; }
+  @keyframes mkFsBounce{ 0%,22%{ opacity:0; } 26%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes mkFsShort{ 0%,41%{ opacity:0; } 45%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes mkFsT1{ 0%,58%{ opacity:0; } 62%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes mkFsT2{ 0%,62%{ opacity:0; } 66%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  .fs-pay{ margin-top:16px; border-top:1px solid var(--line); padding-top:14px; display:grid; gap:9px; }
+  .fs-step{ display:flex; gap:10px; align-items:flex-start; opacity:0; }
+  .fs-step .n{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; font-weight:700; letter-spacing:0.08em;
+    color:#0d0a06; background:var(--gold); border-radius:8px; padding:4px 9px; white-space:nowrap; margin-top:2px; }
+  .fs-step p{ margin:0; }
+  .fs-anim .fs-s1{ animation: fsS1 14s linear infinite; }
+  .fs-anim .fs-s2{ animation: fsS2 14s linear infinite; }
+  .fs-anim .fs-s3{ animation: fsS3 14s linear infinite; }
+  .fs-anim .fs-final{ animation: fsFinal 14s linear infinite; opacity:0; }
+  @keyframes fsS1{ 0%,67%{ opacity:0; } 71%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes fsS2{ 0%,73%{ opacity:0; } 77%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes fsS3{ 0%,79%{ opacity:0; } 83%,92%{ opacity:1; } 97%,100%{ opacity:0; } }
+  @keyframes fsFinal{ 0%,85%{ opacity:0; transform:translateY(5px); } 89%,92%{ opacity:1; transform:translateY(0); } 97%,100%{ opacity:0; } }
   /* ============ NEWS FOLDERS ============ */
   .news-folders{ display:grid; gap:12px; margin-top:8px; }
   .nf{ border:1px solid var(--line); border-left-width:5px; border-radius:12px; padding:12px 14px 13px; }
@@ -414,6 +439,45 @@
         </g>
       </svg>
       <div class="anim-steps"><span><b>1</b> Resistance holds — no chase</span><span><b>2</b> Breakout through the line</span><span><b>3</b> Retest: old resistance acts as support</span><span><b>4</b> Enter on the retest bounce</span></div>
+    </div>
+    <div class="anim-wrap fs-anim">
+      <h3>\U0001F4B0 The Funded Setup, If It Appears</h3>
+      <p class="sub">The Nov 12 supply setup replayed at funded size \u2014 the model for any equal setup. These are the numbers it pays <b>if</b> it appears, confirms, and reaches its targets. Not a promise.</p>
+      <svg viewBox="0 0 560 320" role="img" aria-label="Animated funded setup: price bounces at demand, pulls back into supply, is rejected short, and falls to target one and target two">
+        <line x1="40" y1="140" x2="520" y2="140" stroke="#f85149" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+        <rect class="zone-pulse" x="40" y="30" width="480" height="17" fill="rgba(248,81,73,0.10)" stroke="#f85149" stroke-width="1" stroke-dasharray="5 4"/>
+        <text class="zone-label" x="48" y="43" fill="#f85149">UPPER SUPPLY 3,949.697 \u2013 3,956.497</text>
+        <rect class="zone-pulse" x="40" y="142" width="480" height="26" fill="rgba(248,81,73,0.13)" stroke="#f85149" stroke-width="1" stroke-dasharray="5 4"/>
+        <text class="zone-label" x="48" y="159" fill="#f85149">SUPPLY 3,899.037 \u2013 3,909.961</text>
+        <rect class="zone-pulse" x="40" y="261" width="480" height="17" fill="rgba(63,185,80,0.13)" stroke="#3fb950" stroke-width="1" stroke-dasharray="5 4"/>
+        <text class="zone-label" x="48" y="274" fill="#3fb950">DEMAND 3,853.570 \u2013 3,860.584</text>
+        <path class="price-path" pathLength="100" d="M40,94 L140,252 L165,268 L200,210 L240,175 L300,156 L320,148 L350,190 L400,225 L460,262 L505,280 L520,274"/>
+        <g class="mk mk-bounce">
+          <circle cx="165" cy="268" r="6" fill="none" stroke="#3fb950" stroke-width="2"/>
+          <text class="mk-label" x="56" y="242" fill="#3fb950">BOUNCE AT DEMAND</text>
+        </g>
+        <g class="mk mk-short">
+          <circle cx="320" cy="148" r="6" fill="none" stroke="#f85149" stroke-width="2"/>
+          <text class="mk-label" x="338" y="112" fill="#f85149">SHORT \u2014 3,899.037</text>
+          <text class="mk-label" x="338" y="130" fill="#f85149">STOP \u2014 3,910.961</text>
+        </g>
+        <g class="mk mk-t1">
+          <circle cx="460" cy="262" r="6" fill="none" stroke="#3fb950" stroke-width="2"/>
+          <text class="mk-label" x="48" y="298" fill="#3fb950">TARGET ONE \u2014 3,860.584</text>
+        </g>
+        <g class="mk mk-t2">
+          <circle cx="505" cy="280" r="6" fill="none" stroke="#3fb950" stroke-width="2"/>
+          <text class="mk-label" x="48" y="314" fill="#3fb950">TARGET TWO \u2014 3,852.580</text>
+        </g>
+      </svg>
+      <div class="anim-steps"><span><b>1</b> Bounce at demand 3,853.570 \u2013 3,860.584</span><span><b>2</b> Pullback into supply 3,899.037 \u2013 3,909.961</span><span><b>3</b> Short 3,899.037 \u00b7 Stop 3,910.961 \u00b7 Risk 11.924</span><span><b>4</b> Target one 3,860.584 (1 to 3.22)</span><span><b>5</b> Target two 3,852.580 (1 to 3.90)</span></div>
+      <div class="fs-pay">
+        <div class="fs-step fs-s1"><span class="n">STEP 1</span><p>Funded means no consistency rule \u2014 the day can be as big as the setup. At 4 MGC the risk is $476.96, inside the $500 daily max, and target one pays <b>+$1,538.12</b>.</p></div>
+        <div class="fs-step fs-s2"><span class="n">STEP 2</span><p>The $2,100 buffer stays in the account as the fixed floor. Only profit above it can be requested \u2014 $500 minimum, and requests are daily.</p></div>
+        <div class="fs-step fs-s3"><span class="n">STEP 3</span><p>The split is 90/10, so 90% of $1,538.12 is hers on a same-day request:</p></div>
+        <p class="fs-final" style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--gold);margin:2px 0 0">$1,384.31 \u2014 Rent money, and a little treat.</p>
+        <p class="sub" style="margin:0">Same setup at the standard 2 MGC pays $692.15 at target one. At 4 MGC, target two pays $1,672.45.</p>
+      </div>
     </div>
     <div class="anim-wrap">
       <h3>📊 Real Chart Example — the 8:00 AM Markup (Nov 3)</h3>
